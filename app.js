@@ -31,7 +31,6 @@ passport.use(
         callbackURL: "http://localhost:3000/auth/github/callback"
     },
     function (accessToken, refreshToken, profile, done) {
-        console.log(1);
         if (accessToken) {
             console.log('Access Token:', accessToken);
         }
@@ -46,10 +45,12 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
+    console.log(user)
     done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
+    console.log(user)
     done(null, user);
 });
 
@@ -77,7 +78,6 @@ app.use(passport.session());
  * ensureAuthenticated Callback Function
 */
 const ensureAuthenticated = (req, res, next) => {
-    console.log('ensureAuthenticated');
     if (req.isAuthenticated()) {
         next();
     } else {
